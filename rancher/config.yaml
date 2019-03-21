@@ -1,0 +1,28 @@
+default_password: admin
+default_cluster: cluster01
+version: latest
+kubernetes_version: v1.11.2-rancher1-1
+
+server:
+  start: true
+  cpus: 1
+  memory: 1500
+master:
+  start: true
+  count: 1
+  cpus: 1
+  memory: 1500
+node:
+  start: true
+  count: 2
+  cpus: 1
+  memory: 1500
+ip:
+  server: 192.168.1.30
+  master: 192.168.1.31
+  node:   192.168.1.41
+linked_clones: true
+net:
+  private_nic_type: 82545EM
+  network_type: public_network
+  # network_type: private_network

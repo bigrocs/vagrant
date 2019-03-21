@@ -1,0 +1,69 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+require_relative 'vagrant_rancheros_guest_plugin.rb'
+require 'ipaddr'
+require 'yaml'
+
+x = YAML.load_file('config.yaml')
+puts "Config: #{x.inspect}\n\n"
+
+$private_nic_type = x.fetch('net').fetch('private_nic_type')
+
+Vagrant.configure("2") do |config|
+  if x.fetch('server').fetch('start')
+    config.vm.define "server" do |server|
+        c = x.fetch('server')
+        server.vm.box= "centos/7"
+        server.vm.provider :virtualbox do |v|
+          v.cpus = c.fetch('cpus')
+          v.linked_clone = true if Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new('1.8.0') and x.fetch('linked_clones')
+          v.memory = c.fetch('memory')
+          v.name = "server"
+        end
+        server.vm.network x.fetch('net').fetch('network_type'), ip: x.fetch('ip').fetch('server') , nic_type: $private_nic_type
+        server.vm.hostname = "server"
+        server.vm.provision "shell", path: "scripts/configure_docker.sh"
+        server.vm.provision "shell", path: "scripts/configure_rancher_server.sh", args: [x.fetch('ip').fetch('server'),x.fetch('default_password'), x.fetch('default_cluster'), x.fetch('version'), x.fetch('kubernetes_version')]
+    end   
+  end 
+  if x.fetch('master').fetch('start')
+    master_ip = IPAddr.new(x.fetch('ip').fetch('master'))
+    (1..x.fetch('master').fetch('count')).each do |i|
+      c = x.fetch('master')
+      hostname = "master-%02d" % i
+      config.vm.define hostname do |master|
+        master.vm.box   = "centos/7"
+        master.vm.provider :virtualbox do |v|
+          v.cpus = c.fetch('cpus')
+          v.linked_clone = true if Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new('1.8.0') and x.fetch('linked_clones')
+          v.memory = c.fetch('memory')
+          v.name = hostname
+        end
+        master.vm.network x.fetch('net').fetch('network_type'), ip: IPAddr.new(master_ip.to_i + i - 1, Socket::AF_INET).to_s, nic_type: $private_nic_type
+        master.vm.hostname = hostname
+        master.vm.provision "shell", path: "scripts/configure_docker.sh"
+        master.vm.provision "shell", path: "scripts/configure_rancher_node.sh", args: [x.fetch('ip').fetch('server'), x.fetch('default_password'), x.fetch('default_cluster'),'--etcd --controlplane --worker']
+      end
+    end
+  end 
+    if x.fetch('node').fetch('start')
+    node_ip = IPAddr.new(x.fetch('ip').fetch('node'))
+    (1..x.fetch('node').fetch('count')).each do |i|
+      c = x.fetch('node')
+      hostname = "node-%02d" % i
+      config.vm.define hostname do |node|
+        node.vm.box   = "centos/7"
+        node.vm.provider :virtualbox do |v|
+          v.cpus = c.fetch('cpus')
+          v.linked_clone = true if Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new('1.8.0') and x.fetch('linked_clones')
+          v.memory = c.fetch('memory')
+          v.name = hostname
+        end
+        node.vm.network x.fetch('net').fetch('network_type'), ip: IPAddr.new(node_ip.to_i + i - 1, Socket::AF_INET).to_s, nic_type: $private_nic_type
+        node.vm.hostname = hostname
+        node.vm.provision "shell", path: "scripts/configure_docker.sh"
+        node.vm.provision "shell", path: "scripts/configure_rancher_node.sh", args: [x.fetch('ip').fetch('server'), x.fetch('default_password'), x.fetch('default_cluster')]
+      end
+    end
+  end 
+end
