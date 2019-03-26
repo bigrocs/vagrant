@@ -2,6 +2,7 @@ default_password: admin
 default_cluster: cluster01
 version: latest
 kubernetes_version: v1.11.2-rancher1-1
+default_root_password: admin
 
 server:
   start: true
@@ -9,18 +10,18 @@ server:
   memory: 1500
 master:
   start: true
-  count: 1
+  count: 3
   cpus: 1
   memory: 1500
 node:
   start: true
-  count: 2
+  count: 3
   cpus: 1
   memory: 1500
 ip:
   server: 192.168.1.30
   master: 192.168.1.31
-  node:   192.168.1.41
+  node:   192.168.1.51
 linked_clones: true
 net:
   private_nic_type: 82545EM
