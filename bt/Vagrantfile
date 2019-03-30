@@ -12,6 +12,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "bt" do |server|
         c = x.fetch('bt')
         server.vm.box= "centos/7"
+        server.disksize.size = "300GB"
         server.vm.provider :virtualbox do |v|
           v.cpus = c.fetch('cpus')
           v.linked_clone = true if Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new('1.8.0') and x.fetch('linked_clones')
@@ -20,6 +21,7 @@ Vagrant.configure("2") do |config|
         end
         server.vm.network x.fetch('net').fetch('network_type'), ip: x.fetch('ip').fetch('bt') , nic_type: $private_nic_type
         server.vm.hostname = "bt"
+        # server.vm.provision "shell", path: "scripts/disksize.sh"
         server.vm.provision "shell", path: "scripts/bt_install.sh", args: [x.fetch('ip').fetch('bt'),x.fetch('default_auth_path'), x.fetch('default_name'), x.fetch('default_password')]
     end   
   end 
