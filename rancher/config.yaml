@@ -17,6 +17,7 @@ node:
   count: 6
   cpus: 4
   memory: 10240
+  disksize: 500GB
 ip:
   server: 192.168.1.30
   master: 192.168.1.31
