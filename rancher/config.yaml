@@ -5,18 +5,18 @@ kubernetes_version: v1.11.2-rancher1-1
 
 server:
   start: true
-  cpus: 1
-  memory: 1500
+  cpus: 4
+  memory: 4096
 master:
   start: true
   count: 3
-  cpus: 1
-  memory: 1500
+  cpus: 4
+  memory: 10240
 node:
   start: true
   count: 6
-  cpus: 1
-  memory: 1500
+  cpus: 4
+  memory: 10240
 ip:
   server: 192.168.1.30
   master: 192.168.1.31
