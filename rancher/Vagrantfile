@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
         master.vm.network x.fetch('net').fetch('network_type'), ip: IPAddr.new(master_ip.to_i + i - 1, Socket::AF_INET).to_s, nic_type: $private_nic_type
         master.vm.hostname = hostname
         master.vm.provision "shell", path: "scripts/configure_docker.sh"
-        master.vm.provision "shell", path: "scripts/configure_rancher_node.sh", args: [x.fetch('ip').fetch('server'), x.fetch('default_password'), x.fetch('default_cluster'),'--etcd --controlplane --worker']
+        master.vm.provision "shell", path: "scripts/configure_rancher_node.sh", args: [x.fetch('ip').fetch('server'), x.fetch('default_password'), x.fetch('default_cluster'),'--etcd --controlplane']
       end
     end
   end 
