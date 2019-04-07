@@ -13,8 +13,8 @@ master:
   cpus: 1
   memory: 1500
 node:
-  start: false
-  count: 3
+  start: true
+  count: 6
   cpus: 1
   memory: 1500
 ip:

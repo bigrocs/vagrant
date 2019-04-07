@@ -1,4 +1,4 @@
-# 安装 docker 环境
+#sudo  安装 docker 环境
 sudo yum install -y wget yum-utils device-mapper-persistent-data lvm2
 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 sudo yum makecache fast
@@ -29,3 +29,13 @@ yum install -y iscsi-initiator-utils
 # 安装 jq
 sudo yum -y install epel-release
 sudo yum -y install jq
+
+# Kernel性能调优
+sudo tee >> /etc/sysctl.conf<<-'EOF'
+net.ipv4.ip_forward=1
+net.bridge.bridge-nf-call-iptables=1
+net.ipv4.neigh.default.gc_thresh1=4096
+net.ipv4.neigh.default.gc_thresh2=6144
+net.ipv4.neigh.default.gc_thresh3=8192
+EOF
+sudo sysctl -p
