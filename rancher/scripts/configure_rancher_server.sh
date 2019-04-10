@@ -15,7 +15,7 @@ echo Installing Rancher Server
 sudo docker run -d --restart=always \
  -p 443:443 \
  -p 80:80 \
- -v /var/lib/rancher:/var/lib/rancher \
+ -v /host/rancher:/var/lib/rancher \
  --restart=unless-stopped \
  --name rancher-server \
 $rancher_command
