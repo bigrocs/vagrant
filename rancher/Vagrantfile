@@ -54,11 +54,11 @@ Vagrant.configure("2") do |config|
       hostname = "node-%02d" % i
       config.vm.define hostname do |node|
         node.vm.box   = "centos/7"
-        synced_folder = x.fetch('synced_folder') + '/' + hostname
-        # 新建对应目录
-        FileUtils.mkdir_p(synced_folder)
-        node.vm.synced_folder synced_folder, "/var/lib/rancher/longhorn",create:true, owner:"root",group:"root"
-        # node.disksize.size = c.fetch('disksize')
+        # synced_folder = x.fetch('synced_folder') + '/' + hostname
+        # # 新建对应目录
+        # FileUtils.mkdir_p(synced_folder)
+        # node.vm.synced_folder synced_folder, "/var/lib/rancher/longhorn",create:true, owner:"root",group:"root"
+        # # node.disksize.size = c.fetch('disksize')
         node.vm.provider :virtualbox do |v|
           v.cpus = c.fetch('cpus')
           v.linked_clone = true if Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new('1.8.0') and x.fetch('linked_clones')
