@@ -6,18 +6,18 @@ synced_folder: synced_folder
 
 server:
   start: true
-  cpus: 2
-  memory: 4096
+  cpus: 8
+  memory: 21000
 master:
   start: true
   count: 3
-  cpus: 2
-  memory: 4096
+  cpus: 8
+  memory: 21000
 node:
   start: true
   count: 9
   cpus: 8
-  memory: 10520
+  memory: 21000
 ip:
   server: 192.168.1.30
   master: 192.168.1.31
