@@ -15,9 +15,9 @@ master:
   memory: 4096
 node:
   start: true
-  count: 6
-  cpus: 4
-  memory: 8192
+  count: 9
+  cpus: 8
+  memory: 10520
 ip:
   server: 192.168.1.30
   master: 192.168.1.31
