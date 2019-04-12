@@ -10,9 +10,9 @@ wq
 EOF
 
 sudo partprobe
-
-#格式化分区
-sudo mkfs.ext4 /dev/sda2
-#挂载分区
-sudo mount /dev/sda2 /mnt
-df -h
+# 自动格式化并挂载数据盘
+type=ext4
+mount_dir=/mnt
+sudo mkfs.$type /dev/sda2 
+sudo echo "/dev/sda2 $mount_dir $type defaults 0 0" >> /etc/fstab
+sudo mount -a
