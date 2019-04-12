@@ -12,6 +12,7 @@ master:
   count: 3
   cpus: 4
   memory: 3750
+  worker: false
   disksize: 1055GB
 node:
   start: true
