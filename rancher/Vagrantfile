@@ -33,6 +33,7 @@ Vagrant.configure("2") do |config|
       hostname = "master-%02d" % i
       config.vm.define hostname do |master|
         master.vm.box   = "centos/7"
+        master.disksize.size = c.fetch('disksize')
         master.vm.provider :virtualbox do |v|
           v.cpus = c.fetch('cpus')
           v.linked_clone = true if Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new('1.8.0') and x.fetch('linked_clones')
@@ -42,8 +43,9 @@ Vagrant.configure("2") do |config|
         end
         master.vm.network x.fetch('net').fetch('network_type'), bridge:"em1", ip: IPAddr.new(master_ip.to_i + i - 1, Socket::AF_INET).to_s, nic_type: $private_nic_type
         master.vm.hostname = hostname
+        master.vm.provision "shell", path: "scripts/configure_disksize.sh"
         master.vm.provision "shell", path: "scripts/configure_docker.sh"
-        master.vm.provision "shell", path: "scripts/configure_rancher_node.sh", args: [x.fetch('ip').fetch('server'), x.fetch('default_password'), x.fetch('default_cluster'),'--etcd --controlplane']
+        master.vm.provision "shell", path: "scripts/configure_rancher_node.sh", args: [x.fetch('ip').fetch('server'), x.fetch('default_password'), x.fetch('default_cluster'),'--etcd --controlplane --worker']
       end
     end
   end 
@@ -54,11 +56,7 @@ Vagrant.configure("2") do |config|
       hostname = "node-%02d" % i
       config.vm.define hostname do |node|
         node.vm.box   = "centos/7"
-        # synced_folder = x.fetch('synced_folder') + '/' + hostname
-        # # 新建对应目录
-        # FileUtils.mkdir_p(synced_folder)
-        # node.vm.synced_folder synced_folder, "/var/lib/rancher/longhorn",create:true, owner:"root",group:"root"
-        # # node.disksize.size = c.fetch('disksize')
+        node.disksize.size = c.fetch('disksize')
         node.vm.provider :virtualbox do |v|
           v.cpus = c.fetch('cpus')
           v.linked_clone = true if Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new('1.8.0') and x.fetch('linked_clones')
@@ -67,6 +65,7 @@ Vagrant.configure("2") do |config|
         end
         node.vm.network x.fetch('net').fetch('network_type'), bridge:"em1", ip: IPAddr.new(node_ip.to_i + i - 1, Socket::AF_INET).to_s, nic_type: $private_nic_type
         node.vm.hostname = hostname
+        node.vm.provision "shell", path: "scripts/configure_disksize.sh"
         node.vm.provision "shell", path: "scripts/configure_docker.sh"
         node.vm.provision "shell", path: "scripts/configure_rancher_node.sh", args: [x.fetch('ip').fetch('server'), x.fetch('default_password'), x.fetch('default_cluster')]
       end

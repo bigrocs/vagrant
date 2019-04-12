@@ -2,22 +2,23 @@ default_password: admin
 default_cluster: cluster01
 version: latest
 kubernetes_version: v1.13.5-rancher1-2
-synced_folder: synced_folder
 
 server:
   start: true
-  cpus: 8
-  memory: 21000
+  cpus: 4
+  memory: 3750
 master:
   start: true
   count: 3
-  cpus: 8
-  memory: 21000
+  cpus: 4
+  memory: 3750
+  disksize: 1055GB
 node:
   start: true
   count: 9
   cpus: 8
-  memory: 21000
+  memory: 10521
+  disksize: 1055GB
 ip:
   server: 192.168.1.30
   master: 192.168.1.31
