@@ -1,7 +1,7 @@
 run:
 	vagrant up
 install:
-	mv /root/code/vagrant/rancher/start.sh /etc/rc.d/init.d 
-	chmod +x /etc/rc.d/init.d/start.sh
-	chkconfig --add start.sh
-	chkconfig start.sh on
+	mv /root/code/vagrant/rancher/vagrant /etc/rc.d/init.d 
+	chmod +x /etc/rc.d/init.d/vagrant
+	chkconfig --add vagrant
+	systemctl enable vagrant
