@@ -5,8 +5,9 @@ bt:
   start: true
   cpus: 4
   memory: 4096
+  disksize: 1055GB
 ip:
-  bt: 192.168.1.10
+  bt: 192.168.1.110
 linked_clones: true
 net:
   private_nic_type: 82545EM

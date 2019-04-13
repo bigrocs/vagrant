@@ -1,11 +1,19 @@
-sudo umount /dev/sda1
-sudo fdisk /dev/sda<< EOF
+
+#开始分区
+fdisk -S 56 /dev/sda << EOF
 n
 p
-1
+2
 
 
 wq
 EOF
-sudo resize2fs /dev/sda1
-sudo mount /dev/sda1
+
+sudo partprobe
+# 自动格式化并挂载数据盘
+type=ext4
+mount_dir=/www
+sudo mkdir $mount_dir
+sudo mkfs.$type /dev/sda2 
+sudo echo "/dev/sda2 $mount_dir $type defaults 0 0" >> /etc/fstab
+sudo mount -a
