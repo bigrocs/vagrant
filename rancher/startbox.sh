@@ -1,3 +1,7 @@
+#!/bin/bash
+# 进入当前工作目录
+# /root/code/vagrant/rancher/startbox.sh
+
 VBoxManage modifyvm server --autostart-enabled on
 
 VBoxManage modifyvm master-01 --autostart-enabled on
