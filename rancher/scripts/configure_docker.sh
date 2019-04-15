@@ -1,3 +1,5 @@
+# 设置时区为上海时区
+sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 #sudo  安装 docker 环境
 sudo yum install -y wget yum-utils device-mapper-persistent-data lvm2
 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo

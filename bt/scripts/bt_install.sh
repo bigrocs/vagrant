@@ -4,6 +4,8 @@ default_name=${3:-btadmin}
 default_password=${4:-btadmin}
 
 port='8888'
+# 设置时区为上海时区
+sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 # 安装命令
 sudo yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh<< EOF
 
