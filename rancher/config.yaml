@@ -1,7 +1,7 @@
 default_password: admin
 default_cluster: cluster01
-version: v2.1.8
-kubernetes_version: v1.13.5-rancher1-2
+version: latest
+kubernetes_version: v1.11.2-rancher1-1
 
 server:
   start: true
