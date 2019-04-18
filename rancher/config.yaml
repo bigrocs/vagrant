@@ -6,12 +6,12 @@ kubernetes_version: v1.13.5-rancher1-2
 server:
   start: true
   cpus: 4
-  memory: 3000
+  memory: 5127
 master:
   start: true
   count: 3
   cpus: 4
-  memory: 3000
+  memory: 5127
   worker: false
   disksize: 1055GB
 node:
