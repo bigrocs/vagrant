@@ -1,9 +1,9 @@
 install:
     #自动启动文件请把 run 的命令写入 rc.local
     chmod +x /etc/rc.d/rc.local
-	vagrant up
+    vagrant up
 run:
-	vboxmanage startvm server --type headless
+    vboxmanage startvm server --type headless
     vboxmanage startvm master-01 --type headless
     vboxmanage startvm master-02 --type headless
     vboxmanage startvm master-03 --type headless
