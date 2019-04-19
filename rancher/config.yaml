@@ -1,7 +1,7 @@
 default_password: admin
 default_cluster: cluster01
 rancher_version: v2.2.2
-docker_version: 18.06.1.ce
+docker_version: docker-ce
 kubernetes_version: v1.13.5-rancher1-2
 
 server:
