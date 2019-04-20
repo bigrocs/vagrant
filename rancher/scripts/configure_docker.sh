@@ -1,4 +1,8 @@
 docker_version=${1:-docker-ce}
+os_password=${2:-os_password}
+# 修改密码
+echo root:$os_password | chpasswd
+echo vagrant:$os_password | chpasswd
 # 设置时区为上海时区
 sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 #sudo  安装 docker 环境
@@ -29,9 +33,10 @@ sudo docker -v
 # 安装 open-iscsi
 yum install -y iscsi-initiator-utils
 
-# 安装 jq
-sudo yum -y install epel-release
-sudo yum -y install jq
+# 允许y用户名登录
+sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
+sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+sudo service sshd restart
 
 # Kernel性能调优
 sudo tee >> /etc/sysctl.conf<<-'EOF'
@@ -42,3 +47,7 @@ net.ipv4.neigh.default.gc_thresh2=6144
 net.ipv4.neigh.default.gc_thresh3=8192
 EOF
 sudo sysctl -p
+
+安装 jq
+sudo yum -y install epel-release
+sudo yum -y install jq
