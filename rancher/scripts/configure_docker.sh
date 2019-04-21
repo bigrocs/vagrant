@@ -9,7 +9,7 @@ sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 sudo yum install -y wget yum-utils device-mapper-persistent-data lvm2
 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 sudo yum makecache fast
-sudo yum -y install $docker_version
+sudo yum -y install --setopt=obsoletes=0 $docker_version
 sudo service docker start
 sudo systemctl enable docker
 
