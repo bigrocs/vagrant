@@ -7,13 +7,13 @@ kubernetes_version: v1.13.4-rancher1-1
 
 server:
   start: true
-  cpus: 1
-  memory: 1500
+  cpus: 4
+  memory: 16666
 master:
   start: true
-  count: 1
-  cpus: 1
-  memory: 1500
+  count: 7
+  cpus: 4
+  memory: 16666
   worker: true
   disksize: 2055GB
 node:
