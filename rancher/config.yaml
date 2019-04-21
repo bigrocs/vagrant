@@ -1,7 +1,7 @@
 default_password: admin
 default_cluster: cluster01
 os_password: 123456
-docker_version: docker-ce-18.9.5.ce
+docker_version: docker-ce
 rancher_version: v2.2.2
 kubernetes_version: v1.13.5-rancher1-2
 
