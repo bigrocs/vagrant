@@ -7,25 +7,25 @@ kubernetes_version: v1.11.9-rancher1-1
 
 server:
   start: true
-  cpus: 4
-  memory: 16666
+  cpus: 1
+  memory: 1500
 master:
-  start: true
+  start: false
   count: 3
   cpus: 4
   memory: 16666
   worker: false
   disksize: 2055GB
 node:
-  start: true
+  start: false
   count: 6
   cpus: 8
   memory: 16666
   disksize: 1055GB
 ip:
-  server: 192.168.1.30
-  master: 192.168.1.31
-  node:   192.168.1.51
+  server: 192.168.1.130
+  master: 192.168.1.131
+  node:   192.168.1.151
 linked_clones: true
 net:
   private_nic_type: 82545EM

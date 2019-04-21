@@ -5,6 +5,7 @@ echo root:$os_password | chpasswd
 echo vagrant:$os_password | chpasswd
 # 设置时区为上海时区
 sudo cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 #sudo  安装 docker 环境
 sudo yum install -y wget yum-utils device-mapper-persistent-data lvm2
 sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
@@ -37,7 +38,8 @@ sudo docker -v
 yum install -y iscsi-initiator-utils
 
 # 安装 jq
-sudo yum -y install epel-release
+sudo yum-config-manager --add-repo http://mirrors.aliyun.com/repo/epel-7.repo
+sudo yum makecache fast
 sudo yum -y install jq
 
 # Kernel性能调优
