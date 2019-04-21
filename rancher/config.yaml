@@ -13,7 +13,7 @@ master:
   start: true
   count: 6
   cpus: 8
-  memory: 33333
+  memory: 16666
   worker: true
   disksize: 2055GB
 node:
