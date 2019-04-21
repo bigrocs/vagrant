@@ -11,16 +11,16 @@ server:
   memory: 16666
 master:
   start: true
+  count: 3
+  cpus: 4
+  memory: 16666
+  worker: false
+  disksize: 2055GB
+node:
+  start: true
   count: 6
   cpus: 8
   memory: 16666
-  worker: true
-  disksize: 2055GB
-node:
-  start: false
-  count: 9
-  cpus: 8
-  memory: 10720
   disksize: 1055GB
 ip:
   server: 192.168.1.30
