@@ -1,9 +1,9 @@
 default_password: admin
 default_cluster: cluster01
 os_password: 123456
-rancher_version: v2.2.2
 docker_version: docker-ce
-kubernetes_version: v1.13.5-rancher1-2
+rancher_version: v2.2.2-rc11
+kubernetes_version: v1.11.9-rancher1-1
 
 server:
   start: true
@@ -13,9 +13,9 @@ master:
   start: true
   count: 6
   cpus: 8
-  memory: 16666
+  memory: 33333
   worker: true
-  disksize: 2172GB
+  disksize: 2055GB
 node:
   start: false
   count: 9

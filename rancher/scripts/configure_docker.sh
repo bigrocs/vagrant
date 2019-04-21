@@ -24,19 +24,21 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
+# 允许y用户名登录
+sudo sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
+sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
-# 关闭防火墙
-systemctl stop firewalld.service && systemctl disable firewalld.service
+# 重启 sshd 关闭防火墙
+systemctl restart sshd.service && systemctl stop firewalld.service && systemctl disable firewalld.service
 # 检测 docker 安装情况
 sudo docker -v
 
 # 安装 open-iscsi
 yum install -y iscsi-initiator-utils
 
-# 允许y用户名登录
-sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
-sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-sudo service sshd restart
+# 安装 jq
+sudo yum -y install epel-release
+sudo yum -y install jq
 
 # Kernel性能调优
 sudo tee >> /etc/sysctl.conf<<-'EOF'
@@ -47,7 +49,3 @@ net.ipv4.neigh.default.gc_thresh2=6144
 net.ipv4.neigh.default.gc_thresh3=8192
 EOF
 sudo sysctl -p
-
-安装 jq
-sudo yum -y install epel-release
-sudo yum -y install jq

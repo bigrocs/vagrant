@@ -10,10 +10,10 @@ puts "Config: #{x.inspect}\n\n"
 $private_nic_type = x.fetch('net').fetch('private_nic_type')
 
 Vagrant.configure("2") do |config|
-  if x.fetch('server').fetch('start') 
+  if x.fetch('server').fetch('start')
     config.vm.define "server" do |server|
         c = x.fetch('server')
-        server.vm.box= "centos/7"   
+        server.vm.box= "centos/7"
         server.vm.provider :virtualbox do |v|
           v.cpus = c.fetch('cpus')
           v.linked_clone = true if Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new('1.8.0') and x.fetch('linked_clones')
@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
         server.vm.hostname = "server"
         server.vm.provision "shell", path: "scripts/configure_docker.sh", args: [x.fetch('docker_version'), x.fetch('os_password')]
         server.vm.provision "shell", path: "scripts/configure_rancher_server.sh", args: [x.fetch('ip').fetch('server'),x.fetch('default_password'), x.fetch('default_cluster'), x.fetch('rancher_version'), x.fetch('kubernetes_version')]
-    end
+    end   
   end 
   if x.fetch('master').fetch('start')
     master_ip = IPAddr.new(x.fetch('ip').fetch('master'))
