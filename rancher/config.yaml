@@ -3,17 +3,17 @@ default_cluster: cluster01
 os_password: 123456
 docker_version: docker-ce-17.03.2.ce-1.el7.centos.x86_64
 rancher_version: v2.1.7
-kubernetes_version: v1.11.2-rancher1-1
+kubernetes_version: v1.13.4-rancher1-1
 
 server:
   start: true
-  cpus: 4
-  memory: 16666
+  cpus: 1
+  memory: 1500
 master:
   start: true
-  count: 9
-  cpus: 4
-  memory: 16666
+  count: 1
+  cpus: 1
+  memory: 1500
   worker: true
   disksize: 2055GB
 node:
