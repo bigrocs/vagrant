@@ -23,9 +23,9 @@ node:
   memory: 16666
   disksize: 1055GB
 ip:
-  server: 192.168.1.130
-  master: 192.168.1.131
-  node:   192.168.1.151
+  server: 192.168.1.30
+  master: 192.168.1.31
+  node:   192.168.1.51
 linked_clones: true
 net:
   private_nic_type: 82545EM
