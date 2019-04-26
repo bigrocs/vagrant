@@ -3,11 +3,11 @@ default_password: btadmin
 default_auth_path: btlogin
 bt:
   start: true
-  cpus: 4
-  memory: 4096
+  cpus: 8
+  memory: 1666
   disksize: 1055GB
 ip:
-  bt: 192.168.1.110
+  bt: 192.168.1.27
 linked_clones: true
 net:
   private_nic_type: 82545EM

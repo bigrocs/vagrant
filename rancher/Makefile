@@ -7,6 +7,9 @@ run:
     vboxmanage startvm master-01 --type headless
     vboxmanage startvm master-02 --type headless
     vboxmanage startvm master-03 --type headless
+    vboxmanage startvm master-04 --type headless
+    vboxmanage startvm master-05 --type headless
+    vboxmanage startvm master-06 --type headless
     vboxmanage startvm node-01 --type headless
     vboxmanage startvm node-02 --type headless
     vboxmanage startvm node-03 --type headless
