@@ -4,7 +4,7 @@ default_auth_path: btlogin
 bt:
   start: true
   cpus: 8
-  memory: 1666
+  memory: 16666
   disksize: 1055GB
 ip:
   bt: 192.168.1.27
