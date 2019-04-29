@@ -19,3 +19,9 @@ run:
     vboxmanage startvm node-07 --type headless
     vboxmanage startvm node-08 --type headless
     vboxmanage startvm node-09 --type headless
+
+    vboxmanage startvm win2003 --type headless
+# 重新启动：
+# VBoxManage controlvm dcsvr08 reset
+# 关机：
+# VBoxManage controlvm dcsvr08 poweroff
